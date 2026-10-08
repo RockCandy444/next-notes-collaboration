@@ -59,6 +59,9 @@ test("중복 내용의 고유 ID·수정 취소·공백 오류·삭제 취소·�
     await cards.first().getByRole("button", { name: "삭제", exact: true }).click();
   }
   await expect(page.getByRole("heading", { name: "아직 메모가 없어요" })).toBeVisible();
+  await page.getByRole("button", { name: "첫 메모 쓰기" }).click();
+  await expect(input).toBeFocused();
+  await page.screenshot({ path: "../evidence/state-empty-guide.png", fullPage: true });
   await page.reload();
   await expect(cards).toHaveCount(2);
   await expect(page.getByText("떠오른 생각을 한 줄로 남겨보세요.")).toBeVisible();

@@ -1,0 +1,10 @@
+
+Running 3 tests using 1 worker
+
+(node:15680) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\state.spec.js:3:5 › 홈 숫자 증가·초기화와 Link 이동 (1.2s)
+  ok 2 tests\state.spec.js:17:5 › 중복 내용의 고유 ID·수정 취소·공백 오류·삭제 취소·편집 중 삭제·빈 목록·초기화 (2.2s)
+  ok 3 tests\state.spec.js:71:5 › 모바일 메모 화면에 가로 넘침 없음 (443ms)
+
+  3 passed (4.8s)

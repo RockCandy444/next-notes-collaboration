@@ -74,7 +74,14 @@ export default function Notes() {
             <div className="empty panel">
               <span aria-hidden="true">▤</span>
               <h3>아직 메모가 없어요</h3>
-              <p>새 메모를 작성해 보세요.</p>
+              <p>기억하고 싶은 생각 하나로 첫 기록을 시작해 보세요.</p>
+              <button
+                type="button"
+                className="secondary"
+                onClick={() => inputRef.current?.focus()}
+              >
+                첫 메모 쓰기 <span aria-hidden="true">↗</span>
+              </button>
             </div>
           )}
           <div className="cards">
