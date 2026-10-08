@@ -1,0 +1,14 @@
+test_event_ingestion_filtering_summary_and_persistence (test_monitor.MonitorIntegrationTests.test_event_ingestion_filtering_summary_and_persistence) ... ok
+test_invalid_notes_preserve_database_and_form_values (test_monitor.MonitorIntegrationTests.test_invalid_notes_preserve_database_and_form_values) ... ok
+test_login_validation_hash_session_and_logout (test_monitor.MonitorIntegrationTests.test_login_validation_hash_session_and_logout) ... ok
+test_notes_crud_status_cancellation_and_persistence (test_monitor.MonitorIntegrationTests.test_notes_crud_status_cancellation_and_persistence) ... ok
+test_registration_orm_hash_duplicate_and_login (test_monitor.MonitorIntegrationTests.test_registration_orm_hash_duplicate_and_login) ... ok
+test_registration_validation_origin_and_database_failure (test_monitor.MonitorIntegrationTests.test_registration_validation_origin_and_database_failure) ... [2026-10-08 14:58:08,859] ERROR in app: Monitor database request failed: OperationalError
+ok
+test_sql_payload_is_data_repeatable_setup_and_cross_origin (test_monitor.MonitorIntegrationTests.test_sql_payload_is_data_repeatable_setup_and_cross_origin) ... ok
+test_unauthenticated_api_protection_and_forged_cookie (test_monitor.MonitorIntegrationTests.test_unauthenticated_api_protection_and_forged_cookie) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 4.866s
+
+OK

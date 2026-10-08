@@ -1,0 +1,12 @@
+
+Running 5 tests using 1 worker
+
+(node:18608) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\database.spec.js:14:5 › PostgreSQL 목록·상세·등록·수정 취소·공백 400·수정 저장·새로고침·삭제 취소·삭제 유지·404 (2.7s)
+  ok 2 tests\database.spec.js:65:5 › 없는 메모 수정·삭제는 오류 안내하고 성공 표시 안 함 (1.2s)
+  ok 3 tests\state.spec.js:3:5 › 홈 숫자 증가·초기화와 Link 이동 (791ms)
+  ok 4 tests\state.spec.js:17:5 › 중복 내용의 고유 ID·수정 취소·공백 오류·삭제 취소·편집 중 삭제·빈 목록·초기화 (1.9s)
+  ok 5 tests\state.spec.js:68:5 › 모바일 메모 화면에 가로 넘침 없음 (353ms)
+
+  5 passed (8.0s)

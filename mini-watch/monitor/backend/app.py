@@ -1,0 +1,53 @@
+import secrets
+import sys
+from pathlib import Path
+
+if __package__ in (None, ''):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
+import psycopg
+from flask import Flask
+from sqlalchemy.exc import SQLAlchemyError
+from werkzeug.exceptions import HTTPException
+from monitor.backend.db import setting
+from monitor.backend.routes.auth import auth_bp
+from monitor.backend.routes.events import events_bp
+from monitor.backend.routes.notes import notes_bp
+
+
+def create_app(test_config=None):
+    app = Flask(__name__)
+    app.json.ensure_ascii = False
+    app.config.from_mapping(
+        SECRET_KEY=setting('SECRET_KEY') or secrets.token_hex(32),
+        SESSION_COOKIE_NAME='mini_watch_monitor',
+        SESSION_COOKIE_HTTPONLY=True, SESSION_COOKIE_SAMESITE='Lax',
+        MAX_CONTENT_LENGTH=1024 * 1024,
+        FRONTEND_ORIGIN=setting('FRONTEND_ORIGIN', 'http://127.0.0.1:5173'),
+    )
+    if test_config:
+        app.config.update(test_config)
+    for bp in (auth_bp, events_bp, notes_bp):
+        app.register_blueprint(bp)
+
+    @app.get('/health')
+    def health():
+        return {'service': 'monitor', 'status': 'ok'}
+
+    @app.errorhandler(psycopg.Error)
+    @app.errorhandler(SQLAlchemyError)
+    def database_error(error):
+        app.logger.error('Monitor database request failed: %s', type(error).__name__)
+        return {'error': 'DB에 연결하지 못했습니다. DB 설정과 준비 상태를 확인해 주세요.'}, 503
+
+    @app.errorhandler(HTTPException)
+    def http_error(error):
+        return {'error': '요청을 처리할 수 없습니다.', 'status': error.code}, error.code
+
+    return app
+
+
+app = create_app()
+
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=5200)

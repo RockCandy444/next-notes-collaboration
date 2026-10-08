@@ -1,0 +1,139 @@
+{"method": "GET", "path": "/", "status_code": 200}
+test_actual_monitor_receives_request_json (test_posts.PostsIntegrationTests.test_actual_monitor_receives_request_json) ... 127.0.0.1 - - [08/Oct/2026 15:04:05] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/board/new", "status_code": 400}
+127.0.0.1 - - [08/Oct/2026 15:04:05] "POST /api/events HTTP/1.1" 201 -
+{"method": "GET", "path": "/board/999999", "status_code": 404}
+127.0.0.1 - - [08/Oct/2026 15:04:05] "POST /api/events HTTP/1.1" 201 -
+ok
+{"method": "POST", "path": "/board/new", "status_code": 303}
+test_create_trim_refresh_escape_and_persistence (test_posts.PostsIntegrationTests.test_create_trim_refresh_escape_and_persistence) ... 127.0.0.1 - - [08/Oct/2026 15:04:06] "POST /api/events HTTP/1.1" 201 -
+{"method": "GET", "path": "/board/1", "status_code": 200}
+127.0.0.1 - - [08/Oct/2026 15:04:06] "POST /api/events HTTP/1.1" 201 -
+{"method": "GET", "path": "/board/1", "status_code": 200}
+127.0.0.1 - - [08/Oct/2026 15:04:06] "POST /api/events HTTP/1.1" 201 -
+{"method": "GET", "path": "/board/1", "status_code": 200}
+127.0.0.1 - - [08/Oct/2026 15:04:06] "POST /api/events HTTP/1.1" 201 -
+{"method": "GET", "path": "/posts/1", "status_code": 200}
+127.0.0.1 - - [08/Oct/2026 15:04:06] "POST /api/events HTTP/1.1" 201 -
+ok
+{"method": "POST", "path": "/board/new", "status_code": 303}
+test_delete_get_cancel_post_and_all_missing_routes (test_posts.PostsIntegrationTests.test_delete_get_cancel_post_and_all_missing_routes) ... 127.0.0.1 - - [08/Oct/2026 15:04:06] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/board/new", "status_code": 303}
+127.0.0.1 - - [08/Oct/2026 15:04:07] "POST /api/events HTTP/1.1" 201 -
+{"method": "GET", "path": "/board/1/delete", "status_code": 200}
+127.0.0.1 - - [08/Oct/2026 15:04:07] "POST /api/events HTTP/1.1" 201 -
+{"method": "GET", "path": "/board/1", "status_code": 200}
+127.0.0.1 - - [08/Oct/2026 15:04:07] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/board/1/delete", "status_code": 303}
+127.0.0.1 - - [08/Oct/2026 15:04:07] "POST /api/events HTTP/1.1" 201 -
+{"method": "GET", "path": "/", "status_code": 200}
+127.0.0.1 - - [08/Oct/2026 15:04:07] "POST /api/events HTTP/1.1" 201 -
+{"method": "GET", "path": "/board/1", "status_code": 404}
+127.0.0.1 - - [08/Oct/2026 15:04:07] "POST /api/events HTTP/1.1" 201 -
+{"method": "GET", "path": "/board/1/edit", "status_code": 404}
+127.0.0.1 - - [08/Oct/2026 15:04:07] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/board/1/edit", "status_code": 404}
+127.0.0.1 - - [08/Oct/2026 15:04:07] "POST /api/events HTTP/1.1" 201 -
+{"method": "GET", "path": "/board/1/delete", "status_code": 404}
+127.0.0.1 - - [08/Oct/2026 15:04:07] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/board/1/delete", "status_code": 404}
+127.0.0.1 - - [08/Oct/2026 15:04:08] "POST /api/events HTTP/1.1" 201 -
+ok
+{"method": "POST", "path": "/board/new", "status_code": 303}
+test_edit_prefill_invalid_and_only_target_update (test_posts.PostsIntegrationTests.test_edit_prefill_invalid_and_only_target_update) ... 127.0.0.1 - - [08/Oct/2026 15:04:08] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/board/new", "status_code": 303}
+127.0.0.1 - - [08/Oct/2026 15:04:08] "POST /api/events HTTP/1.1" 201 -
+{"method": "GET", "path": "/board/1/edit", "status_code": 200}
+127.0.0.1 - - [08/Oct/2026 15:04:08] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/board/1/edit", "status_code": 400}
+127.0.0.1 - - [08/Oct/2026 15:04:08] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/board/1/edit", "status_code": 400}
+127.0.0.1 - - [08/Oct/2026 15:04:08] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/board/1/edit", "status_code": 400}
+127.0.0.1 - - [08/Oct/2026 15:04:08] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/board/1/edit", "status_code": 303}
+127.0.0.1 - - [08/Oct/2026 15:04:08] "POST /api/events HTTP/1.1" 201 -
+{"method": "GET", "path": "/", "status_code": 200}
+127.0.0.1 - - [08/Oct/2026 15:04:09] "POST /api/events HTTP/1.1" 201 -
+{"method": "GET", "path": "/board/1", "status_code": 200}
+127.0.0.1 - - [08/Oct/2026 15:04:09] "POST /api/events HTTP/1.1" 201 -
+ok
+{"method": "GET", "path": "/", "status_code": 200}
+test_empty_and_ordered_list_links (test_posts.PostsIntegrationTests.test_empty_and_ordered_list_links) ... 127.0.0.1 - - [08/Oct/2026 15:04:09] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/board/new", "status_code": 303}
+127.0.0.1 - - [08/Oct/2026 15:04:09] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/board/new", "status_code": 303}
+127.0.0.1 - - [08/Oct/2026 15:04:09] "POST /api/events HTTP/1.1" 201 -
+{"method": "GET", "path": "/", "status_code": 200}
+127.0.0.1 - - [08/Oct/2026 15:04:09] "POST /api/events HTTP/1.1" 201 -
+ok
+{"method": "GET", "path": "/login", "status_code": 200}
+test_existing_login_api_and_page (test_posts.PostsIntegrationTests.test_existing_login_api_and_page) ... 127.0.0.1 - - [08/Oct/2026 15:04:09] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/auth/login", "status_code": 400}
+127.0.0.1 - - [08/Oct/2026 15:04:10] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/auth/login", "status_code": 401}
+127.0.0.1 - - [08/Oct/2026 15:04:10] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/auth/login", "status_code": 200}
+127.0.0.1 - - [08/Oct/2026 15:04:10] "POST /api/events HTTP/1.1" 201 -
+ok
+{"method": "POST", "path": "/auth/register", "status_code": 201}
+test_general_registration_hash_duplicate_and_login (test_posts.PostsIntegrationTests.test_general_registration_hash_duplicate_and_login) ... 127.0.0.1 - - [08/Oct/2026 15:04:10] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/auth/register", "status_code": 409}
+127.0.0.1 - - [08/Oct/2026 15:04:10] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/auth/login", "status_code": 200}
+127.0.0.1 - - [08/Oct/2026 15:04:10] "POST /api/events HTTP/1.1" 201 -
+ok
+{"method": "POST", "path": "/auth/register", "status_code": 400}
+test_general_registration_invalid_payload_and_origin (test_posts.PostsIntegrationTests.test_general_registration_invalid_payload_and_origin) ... 127.0.0.1 - - [08/Oct/2026 15:04:11] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/auth/register", "status_code": 400}
+127.0.0.1 - - [08/Oct/2026 15:04:11] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/auth/register", "status_code": 400}
+127.0.0.1 - - [08/Oct/2026 15:04:11] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/auth/register", "status_code": 400}
+127.0.0.1 - - [08/Oct/2026 15:04:11] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/auth/register", "status_code": 400}
+127.0.0.1 - - [08/Oct/2026 15:04:11] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/auth/register", "status_code": 400}
+127.0.0.1 - - [08/Oct/2026 15:04:11] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/auth/register", "status_code": 403}
+127.0.0.1 - - [08/Oct/2026 15:04:11] "POST /api/events HTTP/1.1" 201 -
+ok
+{"method": "POST", "path": "/board/new", "status_code": 400}
+test_invalid_create_preserves_values_and_database (test_posts.PostsIntegrationTests.test_invalid_create_preserves_values_and_database) ... 127.0.0.1 - - [08/Oct/2026 15:04:11] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/board/new", "status_code": 400}
+127.0.0.1 - - [08/Oct/2026 15:04:11] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/board/new", "status_code": 400}
+127.0.0.1 - - [08/Oct/2026 15:04:11] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/board/new", "status_code": 400}
+127.0.0.1 - - [08/Oct/2026 15:04:11] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/board/new", "status_code": 400}
+127.0.0.1 - - [08/Oct/2026 15:04:11] "POST /api/events HTTP/1.1" 201 -
+ok
+{"method": "GET", "path": "/board/999999", "status_code": 404}
+test_missing_posts_and_generic_404 (test_posts.PostsIntegrationTests.test_missing_posts_and_generic_404) ... 127.0.0.1 - - [08/Oct/2026 15:04:12] "POST /api/events HTTP/1.1" 201 -
+{"method": "GET", "path": "/board/999999/edit", "status_code": 404}
+127.0.0.1 - - [08/Oct/2026 15:04:12] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/board/999999/edit", "status_code": 404}
+127.0.0.1 - - [08/Oct/2026 15:04:12] "POST /api/events HTTP/1.1" 201 -
+{"method": "GET", "path": "/board/999999/delete", "status_code": 404}
+127.0.0.1 - - [08/Oct/2026 15:04:12] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/board/999999/delete", "status_code": 404}
+127.0.0.1 - - [08/Oct/2026 15:04:12] "POST /api/events HTTP/1.1" 201 -
+{"method": "GET", "path": "/unknown-page", "status_code": 404}
+127.0.0.1 - - [08/Oct/2026 15:04:12] "POST /api/events HTTP/1.1" 201 -
+{"method": "GET", "path": "/posts/999999", "status_code": 404}
+127.0.0.1 - - [08/Oct/2026 15:04:12] "POST /api/events HTTP/1.1" 201 -
+ok
+{"method": "GET", "path": "/", "status_code": 200}
+test_monitor_failure_does_not_break_board (test_posts.PostsIntegrationTests.test_monitor_failure_does_not_break_board) ... [2026-10-08 15:04:12,736] WARNING in request_logging: 감시 서비스에 요청 기록을 보내지 못했습니다.
+ok
+{"method": "POST", "path": "/board/new", "status_code": 303}
+test_sql_input_is_data_and_prepare_is_repeatable (test_posts.PostsIntegrationTests.test_sql_input_is_data_and_prepare_is_repeatable) ... 127.0.0.1 - - [08/Oct/2026 15:04:12] "POST /api/events HTTP/1.1" 201 -
+{"method": "POST", "path": "/board/new", "status_code": 303}
+127.0.0.1 - - [08/Oct/2026 15:04:13] "POST /api/events HTTP/1.1" 201 -
+ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 11.376s
+
+OK
