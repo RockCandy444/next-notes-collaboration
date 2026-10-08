@@ -671,3 +671,991 @@ Fast-forward
  README.md | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 [exit 0]
+
+[next-notes-collaboration] $ git switch main
+Already on 'main'
+Your branch is up to date with 'origin/main'.
+[exit 0]
+
+[next-notes-collaboration] $ git pull --ff-only
+Already up to date.
+[exit 0]
+
+[next-notes-collaboration] $ git switch -c codex/notes-empty-guide
+Switched to a new branch 'codex/notes-empty-guide'
+[exit 0]
+
+[next-notes-collaboration] $ git add next-practice/components/Notes.js next-practice/tests/state.spec.js evidence/state-empty-guide.png evidence/state-guide-tests.txt evidence/state-build.txt
+warning: in the working copy of 'next-practice/components/Notes.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'next-practice/tests/state.spec.js', LF will be replaced by CRLF the next time Git touches it
+[exit 0]
+
+[next-notes-collaboration] $ git diff --cached --stat
+ evidence/state-build.txt          |   8 ++++----
+ evidence/state-empty-guide.png    | Bin 0 -> 59235 bytes
+ evidence/state-guide-tests.txt    |  10 ++++++++++
+ next-practice/components/Notes.js |   9 ++++++++-
+ next-practice/tests/state.spec.js |   3 +++
+ 5 files changed, 25 insertions(+), 5 deletions(-)
+[exit 0]
+
+[next-notes-collaboration] $ git commit -m feat: guide empty notes to the composer with keyboard focus
+[codex/notes-empty-guide 8c170f8] feat: guide empty notes to the composer with keyboard focus
+ 5 files changed, 25 insertions(+), 5 deletions(-)
+ create mode 100644 evidence/state-empty-guide.png
+ create mode 100644 evidence/state-guide-tests.txt
+[exit 0]
+
+[next-notes-collaboration] $ git push -u origin codex/notes-empty-guide
+remote: 
+remote: Create a pull request for 'codex/notes-empty-guide' on GitHub by visiting:        
+remote:      https://github.com/RockCandy444/next-notes-collaboration/pull/new/codex/notes-empty-guide        
+remote: 
+To https://github.com/RockCandy444/next-notes-collaboration.git
+ * [new branch]      codex/notes-empty-guide -> codex/notes-empty-guide
+branch 'codex/notes-empty-guide' set up to track 'origin/codex/notes-empty-guide'.
+[exit 0]
+
+[next-notes-collaboration] $ gh pr create --repo RockCandy444/next-notes-collaboration --base main --head codex/notes-empty-guide --title 빈 메모 목록에서 작성 칸으로 이동하는 안내 개선 --body-file C:\Users\User\Documents\ChatGPT\Codemit\task50_pr_body.md
+https://github.com/RockCandy444/next-notes-collaboration/pull/6
+[exit 0]
+
+[next-notes-collaboration] $ gh pr diff https://github.com/RockCandy444/next-notes-collaboration/pull/6
+diff --git a/evidence/state-build.txt b/evidence/state-build.txt
+index 4bc3b4a..4cdf720 100644
+--- a/evidence/state-build.txt
++++ b/evidence/state-build.txt
+@@ -3,20 +3,20 @@
+ > next build
+ 
+ ▲ Next.js 16.4.0 (Turbopack)
+-✓ Running next.config.mjs took 16ms
++✓ Running next.config.mjs took 19ms
+ - Cache Components enabled
+ - Partial Prefetching enabled
+ 
+   Creating an optimized production build ...
+-✓ Compiled successfully in 1762ms
++✓ Compiled successfully in 210ms
+   Running TypeScript ...
+-  Finished TypeScript in 32ms ...
++  Finished TypeScript in 2ms ...
+   Collecting page data using 6 workers ...
+   Generating static pages using 6 workers (0/5) ...
+   Generating static pages using 6 workers (1/5) 
+   Generating static pages using 6 workers (2/5) 
+   Generating static pages using 6 workers (3/5) 
+-✓ Generating static pages using 6 workers (5/5) in 601ms
++✓ Generating static pages using 6 workers (5/5) in 779ms
+   Finalizing page optimization ...
+ 
+ Route (app)
+diff --git a/evidence/state-empty-guide.png b/evidence/state-empty-guide.png
+new file mode 100644
+index 0000000..92a6694
+Binary files /dev/null and b/evidence/state-empty-guide.png differ
+diff --git a/evidence/state-guide-tests.txt b/evidence/state-guide-tests.txt
+new file mode 100644
+index 0000000..5300ab1
+--- /dev/null
++++ b/evidence/state-guide-tests.txt
+@@ -0,0 +1,10 @@
++
++Running 3 tests using 1 worker
++
++(node:15680) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
++(Use `node --trace-warnings ...` to show where the warning was created)
++  ok 1 tests\state.spec.js:3:5 › 홈 숫자 증가·초기화와 Link 이동 (1.2s)
++  ok 2 tests\state.spec.js:17:5 › 중복 내용의 고유 ID·수정 취소·공백 오류·삭제 취소·편집 중 삭제·빈 목록·초기화 (2.2s)
++  ok 3 tests\state.spec.js:71:5 › 모바일 메모 화면에 가로 넘침 없음 (443ms)
++
++  3 passed (4.8s)
+diff --git a/next-practice/components/Notes.js b/next-practice/components/Notes.js
+index c7d847c..610420c 100644
+--- a/next-practice/components/Notes.js
++++ b/next-practice/components/Notes.js
+@@ -74,7 +74,14 @@ export default function Notes() {
+             <div className="empty panel">
+               <span aria-hidden="true">▤</span>
+               <h3>아직 메모가 없어요</h3>
+-              <p>새 메모를 작성해 보세요.</p>
++              <p>기억하고 싶은 생각 하나로 첫 기록을 시작해 보세요.</p>
++              <button
++                type="button"
++                className="secondary"
++                onClick={() => inputRef.current?.focus()}
++              >
++                첫 메모 쓰기 <span aria-hidden="true">↗</span>
++              </button>
+             </div>
+           )}
+           <div className="cards">
+diff --git a/next-practice/tests/state.spec.js b/next-practice/tests/state.spec.js
+index 082cc31..dfde1f2 100644
+--- a/next-practice/tests/state.spec.js
++++ b/next-practice/tests/state.spec.js
+@@ -59,6 +59,9 @@ test("중복 내용의 고유 ID·수정 취소·공백 오류·삭제 취소·
+     await cards.first().getByRole("button", { name: "삭제", exact: true }).click();
+   }
+   await expect(page.getByRole("heading", { name: "아직 메모가 없어요" })).toBeVisible();
++  await page.getByRole("button", { name: "첫 메모 쓰기" }).click();
++  await expect(input).toBeFocused();
++  await page.screenshot({ path: "../evidence/state-empty-guide.png", fullPage: true });
+   await page.reload();
+   await expect(cards).toHaveCount(2);
+   await expect(page.getByText("떠오른 생각을 한 줄로 남겨보세요.")).toBeVisible();
+[exit 0]
+
+[next-notes-collaboration] $ gh pr merge https://github.com/RockCandy444/next-notes-collaboration/pull/6 --merge
+[exit 0]
+
+[next-notes-collaboration] $ gh pr view https://github.com/RockCandy444/next-notes-collaboration/pull/6 --json url,state,baseRefName,headRefName,commits,files,mergeCommit
+{"baseRefName":"main","commits":[{"authoredDate":"2026-10-08T06:09:56Z","authors":[{"email":"182621881+RockCandy444@users.noreply.github.com","id":"U_kgDOCuKWuQ","login":"RockCandy444","name":"RockCandy"}],"committedDate":"2026-10-08T06:09:56Z","messageBody":"","messageHeadline":"feat: guide empty notes to the composer with keyboard focus","oid":"8c170f8ec5cfc5492256e012c982638c6e18fddf"}],"files":[{"path":"evidence/state-build.txt","additions":4,"deletions":4,"changeType":"MODIFIED"},{"path":"evidence/state-empty-guide.png","additions":0,"deletions":0,"changeType":"ADDED"},{"path":"evidence/state-guide-tests.txt","additions":10,"deletions":0,"changeType":"ADDED"},{"path":"next-practice/components/Notes.js","additions":8,"deletions":1,"changeType":"MODIFIED"},{"path":"next-practice/tests/state.spec.js","additions":3,"deletions":0,"changeType":"MODIFIED"}],"headRefName":"codex/notes-empty-guide","mergeCommit":{"oid":"56f70ad4c6adc706e2068775dec2c2fe63b439c5"},"state":"MERGED","url":"https://github.com/RockCandy444/next-notes-collaboration/pull/6"}
+[exit 0]
+
+[next-notes-collaboration] $ git switch main
+Switched to branch 'main'
+M	evidence/state-home.png
+Your branch is up to date with 'origin/main'.
+[exit 0]
+
+[next-notes-collaboration] $ git pull --ff-only
+From https://github.com/RockCandy444/next-notes-collaboration
+   3b9b33c..56f70ad  main       -> origin/main
+Updating 3b9b33c..56f70ad
+Fast-forward
+ evidence/state-build.txt          |   8 ++++----
+ evidence/state-empty-guide.png    | Bin 0 -> 59235 bytes
+ evidence/state-guide-tests.txt    |  10 ++++++++++
+ next-practice/components/Notes.js |   9 ++++++++-
+ next-practice/tests/state.spec.js |   3 +++
+ 5 files changed, 25 insertions(+), 5 deletions(-)
+ create mode 100644 evidence/state-empty-guide.png
+ create mode 100644 evidence/state-guide-tests.txt
+[exit 0]
+
+[next-notes-collaboration] $ git branch -d codex/notes-empty-guide
+Deleted branch codex/notes-empty-guide (was 8c170f8).
+[exit 0]
+
+[git-practice-minsu] $ git switch main
+Already on 'main'
+Your branch is up to date with 'origin/main'.
+[exit 0]
+
+[git-practice-minsu] $ git pull --no-rebase origin main
+From https://github.com/RockCandy444/next-notes-collaboration
+ * branch            main       -> FETCH_HEAD
+   072f7a9..56f70ad  main       -> origin/main
+Updating 072f7a9..56f70ad
+Fast-forward
+ .gitignore                                         |    1 +
+ GIT_WORK.md                                        |   67 +
+ README.md                                          |  192 +-
+ VERIFICATION.md                                    |   79 +
+ evidence/database-build.txt                        |   29 +
+ evidence/database-dev-tests.txt                    |    9 +
+ evidence/database-notes.png                        |  Bin 0 -> 75804 bytes
+ evidence/general-tests.txt                         |  139 +
+ evidence/git-commands.txt                          |  673 +++
+ evidence/monitor-tests.txt                         |   14 +
+ evidence/production-browser-tests.txt              |   12 +
+ evidence/state-build.txt                           |   29 +
+ evidence/state-empty-guide.png                     |  Bin 0 -> 59235 bytes
+ evidence/state-guide-tests.txt                     |   10 +
+ evidence/state-home.png                            |  Bin 0 -> 94719 bytes
+ evidence/state-lint.txt                            |    4 +
+ evidence/state-mobile.png                          |  Bin 0 -> 47856 bytes
+ evidence/state-notes.png                           |  Bin 0 -> 59442 bytes
+ mini-watch/CRUD_GUIDE.md                           |   80 +
+ mini-watch/DASHBOARD_GUIDE.md                      |   69 +
+ mini-watch/SIGNUP_GUIDE.md                         |   79 +
+ mini-watch/common/__init__.py                      |    1 +
+ mini-watch/common/registration.py                  |   29 +
+ mini-watch/general/.env.example                    |    6 +
+ mini-watch/general/app.py                          |   46 +
+ mini-watch/general/create_user.py                  |   14 +
+ mini-watch/general/db.py                           |   30 +
+ mini-watch/general/models.py                       |   14 +
+ mini-watch/general/post_rules.py                   |   10 +
+ mini-watch/general/prepare_db.py                   |   11 +
+ mini-watch/general/repositories/__init__.py        |    0
+ mini-watch/general/repositories/posts.py           |   37 +
+ mini-watch/general/repositories/users.py           |   27 +
+ mini-watch/general/request_logging.py              |   23 +
+ mini-watch/general/requirements.txt                |    5 +
+ mini-watch/general/routes/__init__.py              |    0
+ mini-watch/general/routes/auth.py                  |   46 +
+ mini-watch/general/routes/posts.py                 |   78 +
+ mini-watch/general/sql/prepare_posts.sql           |   28 +
+ mini-watch/general/sql/prepare_users.sql           |    6 +
+ mini-watch/general/static/login.js                 |   26 +
+ mini-watch/general/static/style.css                |   56 +
+ mini-watch/general/templates/_post_form.html       |    6 +
+ mini-watch/general/templates/base.html             |   23 +
+ mini-watch/general/templates/delete.html           |    6 +
+ mini-watch/general/templates/detail.html           |    6 +
+ mini-watch/general/templates/edit.html             |    8 +
+ mini-watch/general/templates/error.html            |    5 +
+ mini-watch/general/templates/index.html            |   24 +
+ mini-watch/general/templates/login.html            |    8 +
+ mini-watch/general/templates/new.html              |    8 +
+ mini-watch/general/tests/test_posts.py             |  253 +
+ mini-watch/general/try_db.py                       |    8 +
+ mini-watch/general/try_hash.py                     |   10 +
+ mini-watch/general/try_login.py                    |   15 +
+ mini-watch/general/try_record.py                   |    4 +
+ mini-watch/general/try_send_event.py               |    9 +
+ mini-watch/monitor/__init__.py                     |    1 +
+ mini-watch/monitor/backend/.env.example            |    7 +
+ mini-watch/monitor/backend/__init__.py             |    1 +
+ mini-watch/monitor/backend/app.py                  |   53 +
+ mini-watch/monitor/backend/create_user.py          |   15 +
+ mini-watch/monitor/backend/db.py                   |   31 +
+ mini-watch/monitor/backend/models.py               |   14 +
+ mini-watch/monitor/backend/prepare_db.py           |    9 +
+ .../monitor/backend/repositories/__init__.py       |    1 +
+ mini-watch/monitor/backend/repositories/events.py  |   24 +
+ mini-watch/monitor/backend/repositories/notes.py   |   26 +
+ mini-watch/monitor/backend/repositories/users.py   |   32 +
+ mini-watch/monitor/backend/requirements.txt        |    4 +
+ mini-watch/monitor/backend/routes/__init__.py      |    1 +
+ mini-watch/monitor/backend/routes/auth.py          |   67 +
+ mini-watch/monitor/backend/routes/events.py        |   46 +
+ mini-watch/monitor/backend/routes/notes.py         |   59 +
+ mini-watch/monitor/backend/sql/create_database.sql |    8 +
+ mini-watch/monitor/backend/sql/prepare_monitor.sql |   22 +
+ mini-watch/monitor/backend/tests/test_monitor.py   |  191 +
+ mini-watch/monitor/next-frontend/.env.example      |    2 +
+ mini-watch/monitor/next-frontend/AGENTS.md         |    9 +
+ mini-watch/monitor/next-frontend/next.config.mjs   |   10 +
+ mini-watch/monitor/next-frontend/package-lock.json | 1025 ++++
+ mini-watch/monitor/next-frontend/package.json      |   20 +
+ mini-watch/monitor/next-frontend/src/App.jsx       |   67 +
+ mini-watch/monitor/next-frontend/src/api/auth.js   |   13 +
+ mini-watch/monitor/next-frontend/src/api/client.js |   40 +
+ mini-watch/monitor/next-frontend/src/api/events.js |    3 +
+ mini-watch/monitor/next-frontend/src/api/notes.js  |    8 +
+ .../monitor/next-frontend/src/app/layout.jsx       |   10 +
+ .../monitor/next-frontend/src/app/notes/page.js    |    7 +
+ mini-watch/monitor/next-frontend/src/app/page.jsx  |    5 +
+ .../src/app/register/general/page.jsx              |    5 +
+ .../next-frontend/src/app/register/page.jsx        |    5 +
+ .../next-frontend/src/components/Dashboard.jsx     |  111 +
+ .../next-frontend/src/components/DeleteConfirm.jsx |   52 +
+ .../next-frontend/src/components/EventsPanel.jsx   |  248 +
+ .../next-frontend/src/components/LoginForm.jsx     |  113 +
+ .../next-frontend/src/components/NoteDetail.jsx    |   36 +
+ .../next-frontend/src/components/NoteForm.jsx      |   66 +
+ .../next-frontend/src/components/NotesPanel.jsx    |  219 +
+ .../next-frontend/src/components/RegisterForm.jsx  |   94 +
+ mini-watch/monitor/next-frontend/src/style.css     | 1184 ++++
+ mini-watch/setup/create_databases.sql              |    3 +
+ mini-watch/verification_server.py                  |   45 +
+ next-practice/.gitignore                           |   41 +
+ next-practice/AGENTS.md                            |    9 +
+ next-practice/README.md                            |   13 +
+ next-practice/app/favicon.ico                      |  Bin 0 -> 15086 bytes
+ next-practice/app/globals.css                      |  598 ++
+ next-practice/app/layout.js                        |   31 +
+ next-practice/app/notes/page.js                    |   18 +
+ next-practice/app/page.js                          |   56 +
+ next-practice/app/page.module.css                  |  150 +
+ next-practice/components/Counter.js                |   32 +
+ next-practice/components/Navigation.js             |   25 +
+ next-practice/components/Notes.js                  |  188 +
+ next-practice/eslint.config.mjs                    |   16 +
+ next-practice/jsconfig.json                        |    7 +
+ next-practice/next.config.mjs                      |    8 +
+ next-practice/package-lock.json                    | 6232 ++++++++++++++++++++
+ next-practice/package.json                         |   21 +
+ next-practice/playwright.config.js                 |   11 +
+ next-practice/public/file.svg                      |    1 +
+ next-practice/public/globe.svg                     |    1 +
+ next-practice/public/next.svg                      |    1 +
+ next-practice/public/vercel.svg                    |    1 +
+ next-practice/public/window.svg                    |    1 +
+ next-practice/tests/database.spec.js               |   84 +
+ next-practice/tests/state.spec.js                  |   77 +
+ 128 files changed, 14002 insertions(+), 4 deletions(-)
+ create mode 100644 GIT_WORK.md
+ create mode 100644 VERIFICATION.md
+ create mode 100644 evidence/database-build.txt
+ create mode 100644 evidence/database-dev-tests.txt
+ create mode 100644 evidence/database-notes.png
+ create mode 100644 evidence/general-tests.txt
+ create mode 100644 evidence/git-commands.txt
+ create mode 100644 evidence/monitor-tests.txt
+ create mode 100644 evidence/production-browser-tests.txt
+ create mode 100644 evidence/state-build.txt
+ create mode 100644 evidence/state-empty-guide.png
+ create mode 100644 evidence/state-guide-tests.txt
+ create mode 100644 evidence/state-home.png
+ create mode 100644 evidence/state-lint.txt
+ create mode 100644 evidence/state-mobile.png
+ create mode 100644 evidence/state-notes.png
+ create mode 100644 mini-watch/CRUD_GUIDE.md
+ create mode 100644 mini-watch/DASHBOARD_GUIDE.md
+ create mode 100644 mini-watch/SIGNUP_GUIDE.md
+ create mode 100644 mini-watch/common/__init__.py
+ create mode 100644 mini-watch/common/registration.py
+ create mode 100644 mini-watch/general/.env.example
+ create mode 100644 mini-watch/general/app.py
+ create mode 100644 mini-watch/general/create_user.py
+ create mode 100644 mini-watch/general/db.py
+ create mode 100644 mini-watch/general/models.py
+ create mode 100644 mini-watch/general/post_rules.py
+ create mode 100644 mini-watch/general/prepare_db.py
+ create mode 100644 mini-watch/general/repositories/__init__.py
+ create mode 100644 mini-watch/general/repositories/posts.py
+ create mode 100644 mini-watch/general/repositories/users.py
+ create mode 100644 mini-watch/general/request_logging.py
+ create mode 100644 mini-watch/general/requirements.txt
+ create mode 100644 mini-watch/general/routes/__init__.py
+ create mode 100644 mini-watch/general/routes/auth.py
+ create mode 100644 mini-watch/general/routes/posts.py
+ create mode 100644 mini-watch/general/sql/prepare_posts.sql
+ create mode 100644 mini-watch/general/sql/prepare_users.sql
+ create mode 100644 mini-watch/general/static/login.js
+ create mode 100644 mini-watch/general/static/style.css
+ create mode 100644 mini-watch/general/templates/_post_form.html
+ create mode 100644 mini-watch/general/templates/base.html
+ create mode 100644 mini-watch/general/templates/delete.html
+ create mode 100644 mini-watch/general/templates/detail.html
+ create mode 100644 mini-watch/general/templates/edit.html
+ create mode 100644 mini-watch/general/templates/error.html
+ create mode 100644 mini-watch/general/templates/index.html
+ create mode 100644 mini-watch/general/templates/login.html
+ create mode 100644 mini-watch/general/templates/new.html
+ create mode 100644 mini-watch/general/tests/test_posts.py
+ create mode 100644 mini-watch/general/try_db.py
+ create mode 100644 mini-watch/general/try_hash.py
+ create mode 100644 mini-watch/general/try_login.py
+ create mode 100644 mini-watch/general/try_record.py
+ create mode 100644 mini-watch/general/try_send_event.py
+ create mode 100644 mini-watch/monitor/__init__.py
+ create mode 100644 mini-watch/monitor/backend/.env.example
+ create mode 100644 mini-watch/monitor/backend/__init__.py
+ create mode 100644 mini-watch/monitor/backend/app.py
+ create mode 100644 mini-watch/monitor/backend/create_user.py
+ create mode 100644 mini-watch/monitor/backend/db.py
+ create mode 100644 mini-watch/monitor/backend/models.py
+ create mode 100644 mini-watch/monitor/backend/prepare_db.py
+ create mode 100644 mini-watch/monitor/backend/repositories/__init__.py
+ create mode 100644 mini-watch/monitor/backend/repositories/events.py
+ create mode 100644 mini-watch/monitor/backend/repositories/notes.py
+ create mode 100644 mini-watch/monitor/backend/repositories/users.py
+ create mode 100644 mini-watch/monitor/backend/requirements.txt
+ create mode 100644 mini-watch/monitor/backend/routes/__init__.py
+ create mode 100644 mini-watch/monitor/backend/routes/auth.py
+ create mode 100644 mini-watch/monitor/backend/routes/events.py
+ create mode 100644 mini-watch/monitor/backend/routes/notes.py
+ create mode 100644 mini-watch/monitor/backend/sql/create_database.sql
+ create mode 100644 mini-watch/monitor/backend/sql/prepare_monitor.sql
+ create mode 100644 mini-watch/monitor/backend/tests/test_monitor.py
+ create mode 100644 mini-watch/monitor/next-frontend/.env.example
+ create mode 100644 mini-watch/monitor/next-frontend/AGENTS.md
+ create mode 100644 mini-watch/monitor/next-frontend/next.config.mjs
+ create mode 100644 mini-watch/monitor/next-frontend/package-lock.json
+ create mode 100644 mini-watch/monitor/next-frontend/package.json
+ create mode 100644 mini-watch/monitor/next-frontend/src/App.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/api/auth.js
+ create mode 100644 mini-watch/monitor/next-frontend/src/api/client.js
+ create mode 100644 mini-watch/monitor/next-frontend/src/api/events.js
+ create mode 100644 mini-watch/monitor/next-frontend/src/api/notes.js
+ create mode 100644 mini-watch/monitor/next-frontend/src/app/layout.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/app/notes/page.js
+ create mode 100644 mini-watch/monitor/next-frontend/src/app/page.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/app/register/general/page.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/app/register/page.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/components/Dashboard.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/components/DeleteConfirm.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/components/EventsPanel.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/components/LoginForm.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/components/NoteDetail.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/components/NoteForm.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/components/NotesPanel.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/components/RegisterForm.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/style.css
+ create mode 100644 mini-watch/setup/create_databases.sql
+ create mode 100644 mini-watch/verification_server.py
+ create mode 100644 next-practice/.gitignore
+ create mode 100644 next-practice/AGENTS.md
+ create mode 100644 next-practice/README.md
+ create mode 100644 next-practice/app/favicon.ico
+ create mode 100644 next-practice/app/globals.css
+ create mode 100644 next-practice/app/layout.js
+ create mode 100644 next-practice/app/notes/page.js
+ create mode 100644 next-practice/app/page.js
+ create mode 100644 next-practice/app/page.module.css
+ create mode 100644 next-practice/components/Counter.js
+ create mode 100644 next-practice/components/Navigation.js
+ create mode 100644 next-practice/components/Notes.js
+ create mode 100644 next-practice/eslint.config.mjs
+ create mode 100644 next-practice/jsconfig.json
+ create mode 100644 next-practice/next.config.mjs
+ create mode 100644 next-practice/package-lock.json
+ create mode 100644 next-practice/package.json
+ create mode 100644 next-practice/playwright.config.js
+ create mode 100644 next-practice/public/file.svg
+ create mode 100644 next-practice/public/globe.svg
+ create mode 100644 next-practice/public/next.svg
+ create mode 100644 next-practice/public/vercel.svg
+ create mode 100644 next-practice/public/window.svg
+ create mode 100644 next-practice/tests/database.spec.js
+ create mode 100644 next-practice/tests/state.spec.js
+[exit 0]
+
+[git-practice-minsu] $ git log --oneline -6
+56f70ad Merge pull request #6 from RockCandy444/codex/notes-empty-guide
+8c170f8 feat: guide empty notes to the composer with keyboard focus
+3b9b33c feat: implement Next.js state notes and PostgreSQL integration with verified workflows
+072f7a9 Merge pull request #5 from RockCandy444/feature/title-jiyun
+93e8bce docs: resolve shared title conflict preserving both goals
+2fd913a Merge pull request #4 from RockCandy444/feature/title-minsu
+[exit 0]
+
+[git-practice-minsu] $ git ls-files
+.gitignore
+CHECKLIST.md
+GIT_WORK.md
+README.md
+VERIFICATION.md
+evidence/database-build.txt
+evidence/database-dev-tests.txt
+evidence/database-notes.png
+evidence/general-tests.txt
+evidence/git-commands.txt
+evidence/monitor-tests.txt
+evidence/production-browser-tests.txt
+evidence/state-build.txt
+evidence/state-empty-guide.png
+evidence/state-guide-tests.txt
+evidence/state-home.png
+evidence/state-lint.txt
+evidence/state-mobile.png
+evidence/state-notes.png
+jiyun.md
+mini-watch/CRUD_GUIDE.md
+mini-watch/DASHBOARD_GUIDE.md
+mini-watch/SIGNUP_GUIDE.md
+mini-watch/common/__init__.py
+mini-watch/common/registration.py
+mini-watch/general/.env.example
+mini-watch/general/app.py
+mini-watch/general/create_user.py
+mini-watch/general/db.py
+mini-watch/general/models.py
+mini-watch/general/post_rules.py
+mini-watch/general/prepare_db.py
+mini-watch/general/repositories/__init__.py
+mini-watch/general/repositories/posts.py
+mini-watch/general/repositories/users.py
+mini-watch/general/request_logging.py
+mini-watch/general/requirements.txt
+mini-watch/general/routes/__init__.py
+mini-watch/general/routes/auth.py
+mini-watch/general/routes/posts.py
+mini-watch/general/sql/prepare_posts.sql
+mini-watch/general/sql/prepare_users.sql
+mini-watch/general/static/login.js
+mini-watch/general/static/style.css
+mini-watch/general/templates/_post_form.html
+mini-watch/general/templates/base.html
+mini-watch/general/templates/delete.html
+mini-watch/general/templates/detail.html
+mini-watch/general/templates/edit.html
+mini-watch/general/templates/error.html
+mini-watch/general/templates/index.html
+mini-watch/general/templates/login.html
+mini-watch/general/templates/new.html
+mini-watch/general/tests/test_posts.py
+mini-watch/general/try_db.py
+mini-watch/general/try_hash.py
+mini-watch/general/try_login.py
+mini-watch/general/try_record.py
+mini-watch/general/try_send_event.py
+mini-watch/monitor/__init__.py
+mini-watch/monitor/backend/.env.example
+mini-watch/monitor/backend/__init__.py
+mini-watch/monitor/backend/app.py
+mini-watch/monitor/backend/create_user.py
+mini-watch/monitor/backend/db.py
+mini-watch/monitor/backend/models.py
+mini-watch/monitor/backend/prepare_db.py
+mini-watch/monitor/backend/repositories/__init__.py
+mini-watch/monitor/backend/repositories/events.py
+mini-watch/monitor/backend/repositories/notes.py
+mini-watch/monitor/backend/repositories/users.py
+mini-watch/monitor/backend/requirements.txt
+mini-watch/monitor/backend/routes/__init__.py
+mini-watch/monitor/backend/routes/auth.py
+mini-watch/monitor/backend/routes/events.py
+mini-watch/monitor/backend/routes/notes.py
+mini-watch/monitor/backend/sql/create_database.sql
+mini-watch/monitor/backend/sql/prepare_monitor.sql
+mini-watch/monitor/backend/tests/test_monitor.py
+mini-watch/monitor/next-frontend/.env.example
+mini-watch/monitor/next-frontend/AGENTS.md
+mini-watch/monitor/next-frontend/next.config.mjs
+mini-watch/monitor/next-frontend/package-lock.json
+mini-watch/monitor/next-frontend/package.json
+mini-watch/monitor/next-frontend/src/App.jsx
+mini-watch/monitor/next-frontend/src/api/auth.js
+mini-watch/monitor/next-frontend/src/api/client.js
+mini-watch/monitor/next-frontend/src/api/events.js
+mini-watch/monitor/next-frontend/src/api/notes.js
+mini-watch/monitor/next-frontend/src/app/layout.jsx
+mini-watch/monitor/next-frontend/src/app/notes/page.js
+mini-watch/monitor/next-frontend/src/app/page.jsx
+mini-watch/monitor/next-frontend/src/app/register/general/page.jsx
+mini-watch/monitor/next-frontend/src/app/register/page.jsx
+mini-watch/monitor/next-frontend/src/components/Dashboard.jsx
+mini-watch/monitor/next-frontend/src/components/DeleteConfirm.jsx
+mini-watch/monitor/next-frontend/src/components/EventsPanel.jsx
+mini-watch/monitor/next-frontend/src/components/LoginForm.jsx
+mini-watch/monitor/next-frontend/src/components/NoteDetail.jsx
+mini-watch/monitor/next-frontend/src/components/NoteForm.jsx
+mini-watch/monitor/next-frontend/src/components/NotesPanel.jsx
+mini-watch/monitor/next-frontend/src/components/RegisterForm.jsx
+mini-watch/monitor/next-frontend/src/style.css
+mini-watch/setup/create_databases.sql
+mini-watch/verification_server.py
+minsu.md
+next-practice/.gitignore
+next-practice/AGENTS.md
+next-practice/README.md
+next-practice/app/favicon.ico
+next-practice/app/globals.css
+next-practice/app/layout.js
+next-practice/app/notes/page.js
+next-practice/app/page.js
+next-practice/app/page.module.css
+next-practice/components/Counter.js
+next-practice/components/Navigation.js
+next-practice/components/Notes.js
+next-practice/eslint.config.mjs
+next-practice/jsconfig.json
+next-practice/next.config.mjs
+next-practice/package-lock.json
+next-practice/package.json
+next-practice/playwright.config.js
+next-practice/public/file.svg
+next-practice/public/globe.svg
+next-practice/public/next.svg
+next-practice/public/vercel.svg
+next-practice/public/window.svg
+next-practice/tests/database.spec.js
+next-practice/tests/state.spec.js
+[exit 0]
+
+[git-practice-jiyun] $ git switch main
+Already on 'main'
+Your branch is up to date with 'origin/main'.
+[exit 0]
+
+[git-practice-jiyun] $ git pull --no-rebase origin main
+From https://github.com/RockCandy444/next-notes-collaboration
+ * branch            main       -> FETCH_HEAD
+   072f7a9..56f70ad  main       -> origin/main
+Updating 072f7a9..56f70ad
+Fast-forward
+ .gitignore                                         |    1 +
+ GIT_WORK.md                                        |   67 +
+ README.md                                          |  192 +-
+ VERIFICATION.md                                    |   79 +
+ evidence/database-build.txt                        |   29 +
+ evidence/database-dev-tests.txt                    |    9 +
+ evidence/database-notes.png                        |  Bin 0 -> 75804 bytes
+ evidence/general-tests.txt                         |  139 +
+ evidence/git-commands.txt                          |  673 +++
+ evidence/monitor-tests.txt                         |   14 +
+ evidence/production-browser-tests.txt              |   12 +
+ evidence/state-build.txt                           |   29 +
+ evidence/state-empty-guide.png                     |  Bin 0 -> 59235 bytes
+ evidence/state-guide-tests.txt                     |   10 +
+ evidence/state-home.png                            |  Bin 0 -> 94719 bytes
+ evidence/state-lint.txt                            |    4 +
+ evidence/state-mobile.png                          |  Bin 0 -> 47856 bytes
+ evidence/state-notes.png                           |  Bin 0 -> 59442 bytes
+ mini-watch/CRUD_GUIDE.md                           |   80 +
+ mini-watch/DASHBOARD_GUIDE.md                      |   69 +
+ mini-watch/SIGNUP_GUIDE.md                         |   79 +
+ mini-watch/common/__init__.py                      |    1 +
+ mini-watch/common/registration.py                  |   29 +
+ mini-watch/general/.env.example                    |    6 +
+ mini-watch/general/app.py                          |   46 +
+ mini-watch/general/create_user.py                  |   14 +
+ mini-watch/general/db.py                           |   30 +
+ mini-watch/general/models.py                       |   14 +
+ mini-watch/general/post_rules.py                   |   10 +
+ mini-watch/general/prepare_db.py                   |   11 +
+ mini-watch/general/repositories/__init__.py        |    0
+ mini-watch/general/repositories/posts.py           |   37 +
+ mini-watch/general/repositories/users.py           |   27 +
+ mini-watch/general/request_logging.py              |   23 +
+ mini-watch/general/requirements.txt                |    5 +
+ mini-watch/general/routes/__init__.py              |    0
+ mini-watch/general/routes/auth.py                  |   46 +
+ mini-watch/general/routes/posts.py                 |   78 +
+ mini-watch/general/sql/prepare_posts.sql           |   28 +
+ mini-watch/general/sql/prepare_users.sql           |    6 +
+ mini-watch/general/static/login.js                 |   26 +
+ mini-watch/general/static/style.css                |   56 +
+ mini-watch/general/templates/_post_form.html       |    6 +
+ mini-watch/general/templates/base.html             |   23 +
+ mini-watch/general/templates/delete.html           |    6 +
+ mini-watch/general/templates/detail.html           |    6 +
+ mini-watch/general/templates/edit.html             |    8 +
+ mini-watch/general/templates/error.html            |    5 +
+ mini-watch/general/templates/index.html            |   24 +
+ mini-watch/general/templates/login.html            |    8 +
+ mini-watch/general/templates/new.html              |    8 +
+ mini-watch/general/tests/test_posts.py             |  253 +
+ mini-watch/general/try_db.py                       |    8 +
+ mini-watch/general/try_hash.py                     |   10 +
+ mini-watch/general/try_login.py                    |   15 +
+ mini-watch/general/try_record.py                   |    4 +
+ mini-watch/general/try_send_event.py               |    9 +
+ mini-watch/monitor/__init__.py                     |    1 +
+ mini-watch/monitor/backend/.env.example            |    7 +
+ mini-watch/monitor/backend/__init__.py             |    1 +
+ mini-watch/monitor/backend/app.py                  |   53 +
+ mini-watch/monitor/backend/create_user.py          |   15 +
+ mini-watch/monitor/backend/db.py                   |   31 +
+ mini-watch/monitor/backend/models.py               |   14 +
+ mini-watch/monitor/backend/prepare_db.py           |    9 +
+ .../monitor/backend/repositories/__init__.py       |    1 +
+ mini-watch/monitor/backend/repositories/events.py  |   24 +
+ mini-watch/monitor/backend/repositories/notes.py   |   26 +
+ mini-watch/monitor/backend/repositories/users.py   |   32 +
+ mini-watch/monitor/backend/requirements.txt        |    4 +
+ mini-watch/monitor/backend/routes/__init__.py      |    1 +
+ mini-watch/monitor/backend/routes/auth.py          |   67 +
+ mini-watch/monitor/backend/routes/events.py        |   46 +
+ mini-watch/monitor/backend/routes/notes.py         |   59 +
+ mini-watch/monitor/backend/sql/create_database.sql |    8 +
+ mini-watch/monitor/backend/sql/prepare_monitor.sql |   22 +
+ mini-watch/monitor/backend/tests/test_monitor.py   |  191 +
+ mini-watch/monitor/next-frontend/.env.example      |    2 +
+ mini-watch/monitor/next-frontend/AGENTS.md         |    9 +
+ mini-watch/monitor/next-frontend/next.config.mjs   |   10 +
+ mini-watch/monitor/next-frontend/package-lock.json | 1025 ++++
+ mini-watch/monitor/next-frontend/package.json      |   20 +
+ mini-watch/monitor/next-frontend/src/App.jsx       |   67 +
+ mini-watch/monitor/next-frontend/src/api/auth.js   |   13 +
+ mini-watch/monitor/next-frontend/src/api/client.js |   40 +
+ mini-watch/monitor/next-frontend/src/api/events.js |    3 +
+ mini-watch/monitor/next-frontend/src/api/notes.js  |    8 +
+ .../monitor/next-frontend/src/app/layout.jsx       |   10 +
+ .../monitor/next-frontend/src/app/notes/page.js    |    7 +
+ mini-watch/monitor/next-frontend/src/app/page.jsx  |    5 +
+ .../src/app/register/general/page.jsx              |    5 +
+ .../next-frontend/src/app/register/page.jsx        |    5 +
+ .../next-frontend/src/components/Dashboard.jsx     |  111 +
+ .../next-frontend/src/components/DeleteConfirm.jsx |   52 +
+ .../next-frontend/src/components/EventsPanel.jsx   |  248 +
+ .../next-frontend/src/components/LoginForm.jsx     |  113 +
+ .../next-frontend/src/components/NoteDetail.jsx    |   36 +
+ .../next-frontend/src/components/NoteForm.jsx      |   66 +
+ .../next-frontend/src/components/NotesPanel.jsx    |  219 +
+ .../next-frontend/src/components/RegisterForm.jsx  |   94 +
+ mini-watch/monitor/next-frontend/src/style.css     | 1184 ++++
+ mini-watch/setup/create_databases.sql              |    3 +
+ mini-watch/verification_server.py                  |   45 +
+ next-practice/.gitignore                           |   41 +
+ next-practice/AGENTS.md                            |    9 +
+ next-practice/README.md                            |   13 +
+ next-practice/app/favicon.ico                      |  Bin 0 -> 15086 bytes
+ next-practice/app/globals.css                      |  598 ++
+ next-practice/app/layout.js                        |   31 +
+ next-practice/app/notes/page.js                    |   18 +
+ next-practice/app/page.js                          |   56 +
+ next-practice/app/page.module.css                  |  150 +
+ next-practice/components/Counter.js                |   32 +
+ next-practice/components/Navigation.js             |   25 +
+ next-practice/components/Notes.js                  |  188 +
+ next-practice/eslint.config.mjs                    |   16 +
+ next-practice/jsconfig.json                        |    7 +
+ next-practice/next.config.mjs                      |    8 +
+ next-practice/package-lock.json                    | 6232 ++++++++++++++++++++
+ next-practice/package.json                         |   21 +
+ next-practice/playwright.config.js                 |   11 +
+ next-practice/public/file.svg                      |    1 +
+ next-practice/public/globe.svg                     |    1 +
+ next-practice/public/next.svg                      |    1 +
+ next-practice/public/vercel.svg                    |    1 +
+ next-practice/public/window.svg                    |    1 +
+ next-practice/tests/database.spec.js               |   84 +
+ next-practice/tests/state.spec.js                  |   77 +
+ 128 files changed, 14002 insertions(+), 4 deletions(-)
+ create mode 100644 GIT_WORK.md
+ create mode 100644 VERIFICATION.md
+ create mode 100644 evidence/database-build.txt
+ create mode 100644 evidence/database-dev-tests.txt
+ create mode 100644 evidence/database-notes.png
+ create mode 100644 evidence/general-tests.txt
+ create mode 100644 evidence/git-commands.txt
+ create mode 100644 evidence/monitor-tests.txt
+ create mode 100644 evidence/production-browser-tests.txt
+ create mode 100644 evidence/state-build.txt
+ create mode 100644 evidence/state-empty-guide.png
+ create mode 100644 evidence/state-guide-tests.txt
+ create mode 100644 evidence/state-home.png
+ create mode 100644 evidence/state-lint.txt
+ create mode 100644 evidence/state-mobile.png
+ create mode 100644 evidence/state-notes.png
+ create mode 100644 mini-watch/CRUD_GUIDE.md
+ create mode 100644 mini-watch/DASHBOARD_GUIDE.md
+ create mode 100644 mini-watch/SIGNUP_GUIDE.md
+ create mode 100644 mini-watch/common/__init__.py
+ create mode 100644 mini-watch/common/registration.py
+ create mode 100644 mini-watch/general/.env.example
+ create mode 100644 mini-watch/general/app.py
+ create mode 100644 mini-watch/general/create_user.py
+ create mode 100644 mini-watch/general/db.py
+ create mode 100644 mini-watch/general/models.py
+ create mode 100644 mini-watch/general/post_rules.py
+ create mode 100644 mini-watch/general/prepare_db.py
+ create mode 100644 mini-watch/general/repositories/__init__.py
+ create mode 100644 mini-watch/general/repositories/posts.py
+ create mode 100644 mini-watch/general/repositories/users.py
+ create mode 100644 mini-watch/general/request_logging.py
+ create mode 100644 mini-watch/general/requirements.txt
+ create mode 100644 mini-watch/general/routes/__init__.py
+ create mode 100644 mini-watch/general/routes/auth.py
+ create mode 100644 mini-watch/general/routes/posts.py
+ create mode 100644 mini-watch/general/sql/prepare_posts.sql
+ create mode 100644 mini-watch/general/sql/prepare_users.sql
+ create mode 100644 mini-watch/general/static/login.js
+ create mode 100644 mini-watch/general/static/style.css
+ create mode 100644 mini-watch/general/templates/_post_form.html
+ create mode 100644 mini-watch/general/templates/base.html
+ create mode 100644 mini-watch/general/templates/delete.html
+ create mode 100644 mini-watch/general/templates/detail.html
+ create mode 100644 mini-watch/general/templates/edit.html
+ create mode 100644 mini-watch/general/templates/error.html
+ create mode 100644 mini-watch/general/templates/index.html
+ create mode 100644 mini-watch/general/templates/login.html
+ create mode 100644 mini-watch/general/templates/new.html
+ create mode 100644 mini-watch/general/tests/test_posts.py
+ create mode 100644 mini-watch/general/try_db.py
+ create mode 100644 mini-watch/general/try_hash.py
+ create mode 100644 mini-watch/general/try_login.py
+ create mode 100644 mini-watch/general/try_record.py
+ create mode 100644 mini-watch/general/try_send_event.py
+ create mode 100644 mini-watch/monitor/__init__.py
+ create mode 100644 mini-watch/monitor/backend/.env.example
+ create mode 100644 mini-watch/monitor/backend/__init__.py
+ create mode 100644 mini-watch/monitor/backend/app.py
+ create mode 100644 mini-watch/monitor/backend/create_user.py
+ create mode 100644 mini-watch/monitor/backend/db.py
+ create mode 100644 mini-watch/monitor/backend/models.py
+ create mode 100644 mini-watch/monitor/backend/prepare_db.py
+ create mode 100644 mini-watch/monitor/backend/repositories/__init__.py
+ create mode 100644 mini-watch/monitor/backend/repositories/events.py
+ create mode 100644 mini-watch/monitor/backend/repositories/notes.py
+ create mode 100644 mini-watch/monitor/backend/repositories/users.py
+ create mode 100644 mini-watch/monitor/backend/requirements.txt
+ create mode 100644 mini-watch/monitor/backend/routes/__init__.py
+ create mode 100644 mini-watch/monitor/backend/routes/auth.py
+ create mode 100644 mini-watch/monitor/backend/routes/events.py
+ create mode 100644 mini-watch/monitor/backend/routes/notes.py
+ create mode 100644 mini-watch/monitor/backend/sql/create_database.sql
+ create mode 100644 mini-watch/monitor/backend/sql/prepare_monitor.sql
+ create mode 100644 mini-watch/monitor/backend/tests/test_monitor.py
+ create mode 100644 mini-watch/monitor/next-frontend/.env.example
+ create mode 100644 mini-watch/monitor/next-frontend/AGENTS.md
+ create mode 100644 mini-watch/monitor/next-frontend/next.config.mjs
+ create mode 100644 mini-watch/monitor/next-frontend/package-lock.json
+ create mode 100644 mini-watch/monitor/next-frontend/package.json
+ create mode 100644 mini-watch/monitor/next-frontend/src/App.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/api/auth.js
+ create mode 100644 mini-watch/monitor/next-frontend/src/api/client.js
+ create mode 100644 mini-watch/monitor/next-frontend/src/api/events.js
+ create mode 100644 mini-watch/monitor/next-frontend/src/api/notes.js
+ create mode 100644 mini-watch/monitor/next-frontend/src/app/layout.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/app/notes/page.js
+ create mode 100644 mini-watch/monitor/next-frontend/src/app/page.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/app/register/general/page.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/app/register/page.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/components/Dashboard.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/components/DeleteConfirm.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/components/EventsPanel.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/components/LoginForm.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/components/NoteDetail.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/components/NoteForm.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/components/NotesPanel.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/components/RegisterForm.jsx
+ create mode 100644 mini-watch/monitor/next-frontend/src/style.css
+ create mode 100644 mini-watch/setup/create_databases.sql
+ create mode 100644 mini-watch/verification_server.py
+ create mode 100644 next-practice/.gitignore
+ create mode 100644 next-practice/AGENTS.md
+ create mode 100644 next-practice/README.md
+ create mode 100644 next-practice/app/favicon.ico
+ create mode 100644 next-practice/app/globals.css
+ create mode 100644 next-practice/app/layout.js
+ create mode 100644 next-practice/app/notes/page.js
+ create mode 100644 next-practice/app/page.js
+ create mode 100644 next-practice/app/page.module.css
+ create mode 100644 next-practice/components/Counter.js
+ create mode 100644 next-practice/components/Navigation.js
+ create mode 100644 next-practice/components/Notes.js
+ create mode 100644 next-practice/eslint.config.mjs
+ create mode 100644 next-practice/jsconfig.json
+ create mode 100644 next-practice/next.config.mjs
+ create mode 100644 next-practice/package-lock.json
+ create mode 100644 next-practice/package.json
+ create mode 100644 next-practice/playwright.config.js
+ create mode 100644 next-practice/public/file.svg
+ create mode 100644 next-practice/public/globe.svg
+ create mode 100644 next-practice/public/next.svg
+ create mode 100644 next-practice/public/vercel.svg
+ create mode 100644 next-practice/public/window.svg
+ create mode 100644 next-practice/tests/database.spec.js
+ create mode 100644 next-practice/tests/state.spec.js
+[exit 0]
+
+[git-practice-jiyun] $ git log --oneline -6
+56f70ad Merge pull request #6 from RockCandy444/codex/notes-empty-guide
+8c170f8 feat: guide empty notes to the composer with keyboard focus
+3b9b33c feat: implement Next.js state notes and PostgreSQL integration with verified workflows
+072f7a9 Merge pull request #5 from RockCandy444/feature/title-jiyun
+93e8bce docs: resolve shared title conflict preserving both goals
+2fd913a Merge pull request #4 from RockCandy444/feature/title-minsu
+[exit 0]
+
+[git-practice-jiyun] $ git ls-files
+.gitignore
+CHECKLIST.md
+GIT_WORK.md
+README.md
+VERIFICATION.md
+evidence/database-build.txt
+evidence/database-dev-tests.txt
+evidence/database-notes.png
+evidence/general-tests.txt
+evidence/git-commands.txt
+evidence/monitor-tests.txt
+evidence/production-browser-tests.txt
+evidence/state-build.txt
+evidence/state-empty-guide.png
+evidence/state-guide-tests.txt
+evidence/state-home.png
+evidence/state-lint.txt
+evidence/state-mobile.png
+evidence/state-notes.png
+jiyun.md
+mini-watch/CRUD_GUIDE.md
+mini-watch/DASHBOARD_GUIDE.md
+mini-watch/SIGNUP_GUIDE.md
+mini-watch/common/__init__.py
+mini-watch/common/registration.py
+mini-watch/general/.env.example
+mini-watch/general/app.py
+mini-watch/general/create_user.py
+mini-watch/general/db.py
+mini-watch/general/models.py
+mini-watch/general/post_rules.py
+mini-watch/general/prepare_db.py
+mini-watch/general/repositories/__init__.py
+mini-watch/general/repositories/posts.py
+mini-watch/general/repositories/users.py
+mini-watch/general/request_logging.py
+mini-watch/general/requirements.txt
+mini-watch/general/routes/__init__.py
+mini-watch/general/routes/auth.py
+mini-watch/general/routes/posts.py
+mini-watch/general/sql/prepare_posts.sql
+mini-watch/general/sql/prepare_users.sql
+mini-watch/general/static/login.js
+mini-watch/general/static/style.css
+mini-watch/general/templates/_post_form.html
+mini-watch/general/templates/base.html
+mini-watch/general/templates/delete.html
+mini-watch/general/templates/detail.html
+mini-watch/general/templates/edit.html
+mini-watch/general/templates/error.html
+mini-watch/general/templates/index.html
+mini-watch/general/templates/login.html
+mini-watch/general/templates/new.html
+mini-watch/general/tests/test_posts.py
+mini-watch/general/try_db.py
+mini-watch/general/try_hash.py
+mini-watch/general/try_login.py
+mini-watch/general/try_record.py
+mini-watch/general/try_send_event.py
+mini-watch/monitor/__init__.py
+mini-watch/monitor/backend/.env.example
+mini-watch/monitor/backend/__init__.py
+mini-watch/monitor/backend/app.py
+mini-watch/monitor/backend/create_user.py
+mini-watch/monitor/backend/db.py
+mini-watch/monitor/backend/models.py
+mini-watch/monitor/backend/prepare_db.py
+mini-watch/monitor/backend/repositories/__init__.py
+mini-watch/monitor/backend/repositories/events.py
+mini-watch/monitor/backend/repositories/notes.py
+mini-watch/monitor/backend/repositories/users.py
+mini-watch/monitor/backend/requirements.txt
+mini-watch/monitor/backend/routes/__init__.py
+mini-watch/monitor/backend/routes/auth.py
+mini-watch/monitor/backend/routes/events.py
+mini-watch/monitor/backend/routes/notes.py
+mini-watch/monitor/backend/sql/create_database.sql
+mini-watch/monitor/backend/sql/prepare_monitor.sql
+mini-watch/monitor/backend/tests/test_monitor.py
+mini-watch/monitor/next-frontend/.env.example
+mini-watch/monitor/next-frontend/AGENTS.md
+mini-watch/monitor/next-frontend/next.config.mjs
+mini-watch/monitor/next-frontend/package-lock.json
+mini-watch/monitor/next-frontend/package.json
+mini-watch/monitor/next-frontend/src/App.jsx
+mini-watch/monitor/next-frontend/src/api/auth.js
+mini-watch/monitor/next-frontend/src/api/client.js
+mini-watch/monitor/next-frontend/src/api/events.js
+mini-watch/monitor/next-frontend/src/api/notes.js
+mini-watch/monitor/next-frontend/src/app/layout.jsx
+mini-watch/monitor/next-frontend/src/app/notes/page.js
+mini-watch/monitor/next-frontend/src/app/page.jsx
+mini-watch/monitor/next-frontend/src/app/register/general/page.jsx
+mini-watch/monitor/next-frontend/src/app/register/page.jsx
+mini-watch/monitor/next-frontend/src/components/Dashboard.jsx
+mini-watch/monitor/next-frontend/src/components/DeleteConfirm.jsx
+mini-watch/monitor/next-frontend/src/components/EventsPanel.jsx
+mini-watch/monitor/next-frontend/src/components/LoginForm.jsx
+mini-watch/monitor/next-frontend/src/components/NoteDetail.jsx
+mini-watch/monitor/next-frontend/src/components/NoteForm.jsx
+mini-watch/monitor/next-frontend/src/components/NotesPanel.jsx
+mini-watch/monitor/next-frontend/src/components/RegisterForm.jsx
+mini-watch/monitor/next-frontend/src/style.css
+mini-watch/setup/create_databases.sql
+mini-watch/verification_server.py
+minsu.md
+next-practice/.gitignore
+next-practice/AGENTS.md
+next-practice/README.md
+next-practice/app/favicon.ico
+next-practice/app/globals.css
+next-practice/app/layout.js
+next-practice/app/notes/page.js
+next-practice/app/page.js
+next-practice/app/page.module.css
+next-practice/components/Counter.js
+next-practice/components/Navigation.js
+next-practice/components/Notes.js
+next-practice/eslint.config.mjs
+next-practice/jsconfig.json
+next-practice/next.config.mjs
+next-practice/package-lock.json
+next-practice/package.json
+next-practice/playwright.config.js
+next-practice/public/file.svg
+next-practice/public/globe.svg
+next-practice/public/next.svg
+next-practice/public/vercel.svg
+next-practice/public/window.svg
+next-practice/tests/database.spec.js
+next-practice/tests/state.spec.js
+[exit 0]

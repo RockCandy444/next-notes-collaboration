@@ -185,7 +185,7 @@ Pop-Location
 
 README, [GIT_WORK.md](GIT_WORK.md), [VERIFICATION.md](VERIFICATION.md), `evidence`의 실제 로그·캡처와 두 앱의 소스·package-lock.json을 함께 제공합니다.
 실제 .env·DB 비밀번호·인증 토큰·node_modules·.next·가상환경·캐시는 Git에서 제외했습니다.
-저장소가 비공개라면 채점 전에 강사가 원본 PR과 소스를 읽을 수 있는 공개 또는 접근 설정이 필요합니다.
+사용자 승인에 따라 공개 저장소로 제공하여 강사가 소스와 원본 PR을 열람할 수 있도록 준비했습니다.
 
 ## 협업 실습
 

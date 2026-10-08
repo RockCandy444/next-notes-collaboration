@@ -52,8 +52,26 @@ PR #3 병합 뒤 다시 양쪽 pull을 실행하여 CHECKLIST.md를 받았습니
 
 ## 선택 2: Next.js 실제 변경의 새 PR
 
-앱의 기본 구현을 main에 올린 뒤 최신 main에서 새 `codex/notes-empty-guide` 작업 브랜치로 빈 목록 안내를 개선합니다.
-실제 변경 파일, PR 주소, 화면 확인과 병합·pull 명령은 다음 기록에 이어서 추가합니다.
+앱의 기본 구현 `3b9b33c`를 main에 올린 뒤 최신 main을 pull하고 새 `codex/notes-empty-guide` 브랜치를 만들었습니다.
+**[PR #6](https://github.com/RockCandy444/next-notes-collaboration/pull/6)**의 base는 main입니다.
+
+실제 앱 변경 파일: `next-practice/components/Notes.js`.
+빈 목록의 문구를 구체적으로 바꾸고 `첫 메모 쓰기` 버튼을 추가하여 작성 textarea에 포커스를 이동하게 했습니다.
+`next-practice/tests/state.spec.js`에는 빈 목록 버튼 클릭과 입력 포커스 확인을 추가했습니다.
+앱 동작 변경과 검증 자료만 추가되는 Files changed를 직접 읽어 PR 본문에 결과를 적었습니다.
+
+![빈 목록 안내 개선과 입력 포커스](evidence/state-empty-guide.png)
+
+lint·build 성공 뒤 start로 실행한 앱의 state 브라우저 테스트 3개 통과를 [state-guide-tests.txt](evidence/state-guide-tests.txt)에 기록했습니다.
+PR #6을 merge commit으로 병합한 뒤 `main`으로 전환하고 `git pull --ff-only`로 결과를 받았습니다.
+root의 완료한 작업 브랜치를 삭제했으며 민수·지윤 두 폴더에서도 main을 pull했습니다.
+앞의 필수 PR 및 충돌 PR과 동일하게 실제 명령·출력·PR 메타데이터가 git-commands.txt에 있습니다.
+
+## 제출 상태
+
+필수 PR #1·#2·#3, 충돌 실습 #4·#5, 앱 개선 #6을 모두 merge commit으로 병합했습니다.
+전체 소스, 실제 출력과 검증 결과를 동일 저장소 main에서 확인할 수 있습니다.
+강의실의 제출 버튼은 누르지 않았습니다. 저장소 공개 범위는 사용자 승인을 받아 Public으로 전환합니다.
 
 ## 질문 답변
 

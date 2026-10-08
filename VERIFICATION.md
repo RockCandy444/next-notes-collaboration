@@ -63,6 +63,7 @@ Success! Created next-practice ...
 | 필수 앱 build | 성공, `/`·`/notes` 생성 | [state-build.txt](evidence/state-build.txt) |
 | 심화 앱 build | 성공, `/`·`/notes`·회원가입 경로 생성 | [database-build.txt](evidence/database-build.txt) |
 | build → start 브라우저 테스트 | 5 passed | [production-browser-tests.txt](evidence/production-browser-tests.txt) |
+| PR #6 빈 목록 안내 개선 후 state 프로덕션 검사 | 3 passed | [state-guide-tests.txt](evidence/state-guide-tests.txt) |
 | 감시 API PostgreSQL 통합 검사 | 8 tests, OK | [monitor-tests.txt](evidence/monitor-tests.txt) |
 | 기존 게시판 PostgreSQL 통합 검사 | 12 tests, OK | [general-tests.txt](evidence/general-tests.txt) |
 
@@ -77,3 +78,4 @@ Success! Created next-practice ...
 - Next.js 프록시 API 주소를 서버 환경 변수로 설정하게 했고 편집 폼의 label과 입력 ID를 명시적으로 연결했습니다.
 - 기존 요청 기록, 로그인·회원가입, 메모 상태, PUT·DELETE API와 SQL은 유지했습니다.
 - 재현 가능한 브라우저 검사와 임시 PostgreSQL 검증 서버를 추가했습니다.
+- PR #6에서 빈 목록의 첫 메모 쓰기 버튼과 작성 칸 포커스 이동을 추가하고 프로덕션 검사 3개를 다시 통과했습니다.
